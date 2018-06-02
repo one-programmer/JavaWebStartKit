@@ -1,55 +1,42 @@
 package com.example.demo.common.response;
 
 import com.example.demo.common.exception.base.ErrorCode;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
+@Getter
+@AllArgsConstructor
 public class Response<T> {
-    private int errno = 200;
-    private String errmsg = "success";
-    private T data;
 
-    public Response() {
-    }
+    private int code = HttpStatus.OK.value();
+
+    private String msg = "success";
+
+    private T data;
 
     public Response(T data) {
         this.data = data;
     }
 
-    public Response(int errno, String errmsg) {
-        this.errno = errno;
-        this.errmsg = errmsg;
+    public Response(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 
-    public Response(int errno, String errmsg, T data) {
-        this.errno = errno;
-        this.errmsg = errmsg;
+    public Response(int code, T data) {
+        this.code = code;
         this.data = data;
     }
 
     public Response(ErrorCode errorCode) {
-        this.errno = errorCode.getCode();
-        this.errmsg = errorCode.getMessage();
+        this.code = errorCode.getCode();
+        this.msg = errorCode.getMessage();
     }
 
     public Response(ErrorCode errorCode, T data) {
-        this.errno = errorCode.getCode();
-        this.errmsg = errorCode.getMessage();
-        this.data = data;
-    }
-
-    public int getErrno() {
-        return errno;
-    }
-
-
-    public String getErrmsg() {
-        return errmsg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
+        this.code = errorCode.getCode();
+        this.msg = errorCode.getMessage();
         this.data = data;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public abstract class BaseException extends RuntimeException implements ErrorCode {
 
     private final ErrorCode errorCode;
+
     private HttpStatus status;
 
     public BaseException(ErrorCode errorCode) {

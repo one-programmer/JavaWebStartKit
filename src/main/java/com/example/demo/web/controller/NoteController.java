@@ -17,6 +17,11 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello world!";
+    }
+
     @GetMapping("/notes")
     public List<NoteVO> getAllNotes() {
         return noteService.listAllNotes();
