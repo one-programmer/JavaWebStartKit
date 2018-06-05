@@ -14,3 +14,15 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
   jackson:
     default-property-inclusion: non_null
+logging:
+  level:
+    org.springframework:
+      data: debug
+      security: debug
+
+# JWT
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHead: "Bearer "

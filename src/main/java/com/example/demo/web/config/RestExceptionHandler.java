@@ -8,6 +8,7 @@ import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -41,6 +42,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         logger.info("处理http请求异常, errrno: " + ex.getCode() + ", errmsg: " + ex.getMessage(), ex);
         Response response = new Response<>(ex.getErrorCode(), ex.getMessage());
         return super.handleExceptionInternal(ex, response, new HttpHeaders(), status, webRequest);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest request, AccessDeniedException ex, WebRequest webRequest) {
+        Response response = new Response<>(401, ex.getMessage(), "无权限");
+        return super.handleExceptionInternal(ex, response, new HttpHeaders(), HttpStatus.UNAUTHORIZED, webRequest);
     }
 
     @ExceptionHandler(Exception.class)
