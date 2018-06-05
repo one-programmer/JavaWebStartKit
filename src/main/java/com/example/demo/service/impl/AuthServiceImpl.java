@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.common.exception.DemoErrorEnum;
 import com.example.demo.common.exception.DemoException;
+import com.example.demo.domain.vo.UserRegisterVO;
 import com.example.demo.web.security.JwtTokenUtil;
 import com.example.demo.domain.po.User;
 import com.example.demo.domain.vo.UserVO;
@@ -25,8 +26,16 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserVO register(UserVO user) {
-        return null;
+    public UserVO register(UserRegisterVO userRegisterVO) {
+        if (userRepository.findByUsername(userRegisterVO.getUsername()) != null) {
+            throw new DemoException("用户名已存在", DemoErrorEnum.ACCOUNT_ALREADY_EXISTS);
+        }
+        if (userRepository.findByMobile(userRegisterVO.getMobile()) != null) {
+            throw new DemoException("手机号已注册", DemoErrorEnum.ACCOUNT_ALREADY_EXISTS);
+        }
+
+        User user = userRepository.save(userRegisterVO.covertToUser());
+        return UserVO.converFor(user);
     }
 
     @Override
