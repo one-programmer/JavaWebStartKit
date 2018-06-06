@@ -1,6 +1,5 @@
 package com.example.demo.web.security;
 
-import com.example.demo.web.security.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

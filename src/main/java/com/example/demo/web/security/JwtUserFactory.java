@@ -19,7 +19,7 @@ public class JwtUserFactory {
                 user.getId(),
                 user.getUsername(),
                 user.getPassword(),
-                mapToGrantedAuthorities(Lists.newArrayList("ROLE_TEST")) // TODO
+                mapToGrantedAuthorities(Lists.newArrayList("ROLE_TEST")) // TODO read from db
         );
     }
 
