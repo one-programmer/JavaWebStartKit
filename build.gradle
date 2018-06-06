@@ -30,6 +30,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.projectlombok:lombok:$lombokVersion")
 	compile("com.google.guava:guava:$guavaVersion")
+    compile("io.sentry:sentry-spring:$sentryVersion")
 
 	runtime('mysql:mysql-connector-java')
 
