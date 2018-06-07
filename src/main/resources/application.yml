@@ -26,3 +26,14 @@ jwt:
   secret: mySecret
   expiration: 604800
   tokenHead: "Bearer "
+
+---
+spring:
+  profiles: test
+server:
+  port: 7655
+---
+spring:
+  profiles: dev
+server:
+  port: 7656
