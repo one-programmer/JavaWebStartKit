@@ -19,6 +19,8 @@ logging:
     org.springframework:
       data: debug
       security: debug
+sentry:
+  dsn: https://9e6da7cae58c49a1bbee175846275e43@sentry.io/1220905  # Bohan
 
 # JWT
 jwt:
@@ -39,3 +41,5 @@ spring:
   profiles: dev
 server:
   port: 7656
+sentry:
+  dsn: https://6acec681efdc47e7b1de0d079ee4511a@sentry.io/217520  # Panmax
