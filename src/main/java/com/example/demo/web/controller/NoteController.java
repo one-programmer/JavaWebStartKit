@@ -5,6 +5,9 @@ import com.example.demo.common.exception.DemoException;
 import com.example.demo.domain.vo.NoteVO;
 import com.example.demo.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,7 +26,9 @@ public class NoteController {
     }
 
     @GetMapping("/notes")
+    @PreAuthorize("hasRole('USER') or hasRole('TEST')")
     public List<NoteVO> getAllNotes() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return noteService.listAllNotes();
     }
 
@@ -44,6 +49,7 @@ public class NoteController {
     }
 
     @DeleteMapping("/notes/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public boolean deleteNote(@PathVariable(value = "id") Long noteId) {
         return noteService.deleteNote(noteId);
     }
