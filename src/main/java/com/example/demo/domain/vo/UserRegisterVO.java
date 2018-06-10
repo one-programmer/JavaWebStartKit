@@ -1,5 +1,6 @@
 package com.example.demo.domain.vo;
 
+import com.example.demo.common.utils.PasswordEncoder;
 import com.example.demo.domain.po.User;
 import com.google.common.base.Converter;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class UserRegisterVO {
         protected User doForward(UserRegisterVO userRegisterVO) {
             User user = new User();
             BeanUtils.copyProperties(userRegisterVO, user);
+            user.setPassword(new PasswordEncoder().encode(userRegisterVO.getPassword()));
             return user;
         }
 

@@ -1,5 +1,6 @@
 package com.example.demo.web.security;
 
+import com.example.demo.common.utils.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService(this.userDetailsService);
+                .userDetailsService(this.userDetailsService).passwordEncoder(new PasswordEncoder());
     }
 
     @Bean

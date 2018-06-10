@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.common.exception.DemoErrorEnum;
 import com.example.demo.common.exception.DemoException;
+import com.example.demo.common.utils.PasswordEncoder;
 import com.example.demo.domain.vo.UserRegisterVO;
 import com.example.demo.web.security.JwtTokenUtil;
 import com.example.demo.domain.po.User;
@@ -44,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
         final User user = userRepository.findByUsername(username);
 
         // FIXME password verify so bad
-        if (user == null || !user.getPassword().equals(password)) {
+        if (user == null || !new PasswordEncoder().matches(password, user.getPassword())) {
             throw new DemoException("用户名或密码错误", DemoErrorEnum.USERNAME_OR_PASSWORD_ERROR);
         }
 

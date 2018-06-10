@@ -20,6 +20,8 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+	maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+	mavenLocal()
 	mavenCentral()
 }
 
@@ -33,6 +35,8 @@ dependencies {
     compile("com.google.guava:guava:$guavaVersion")
     compile("io.sentry:sentry-spring:$sentryVersion")
 	compile("io.jsonwebtoken:jjwt:${jjwtVersion}")
+	compile("org.apache.commons:commons-lang3:$commonsLangVersion")
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
 
 	runtime('mysql:mysql-connector-java')
 
