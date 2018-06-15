@@ -44,7 +44,6 @@ public class AuthServiceImpl implements AuthService {
 
         final User user = userRepository.findByUsername(username);
 
-        // FIXME password verify so bad
         if (user == null || !new PasswordEncoder().matches(password, user.getPassword())) {
             throw new DemoException("用户名或密码错误", DemoErrorEnum.USERNAME_OR_PASSWORD_ERROR);
         }
